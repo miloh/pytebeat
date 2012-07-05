@@ -107,17 +107,17 @@ def make_window():
     outfile2 = open_new_outfile()
     outfd = Tee(outfd, outfile2)
     pygame.init()
-    default_font = '/home/kragen/.fonts/a/anami.ttf'
-    font = pygame.font.Font(default_font, 24) if os.path.exists(default_font) else None
+    default_font = 'Dion.ttf'
+    font = pygame.font.Font(default_font, 28) if os.path.exists(default_font) else None
     
     
     screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
     pygame.mouse.set_visible(False)
-    formula = sdltextfield.TextField((10, 266), 
+    formula = sdltextfield.TextField((100, 375), 
                                      foreground=(0,0,255),
                                      font=font,
                                      text = 't >> 5 | t >> 4')
-    error = sdltextfield.TextField((10, 400), foreground=(255,0,0), focused=False, font=font)
+    error = sdltextfield.TextField((100, 425), foreground=(255,0,0), focused=False, font=font)
     while True:
         run_mainloop(error, formula, outfd, screen)
 
