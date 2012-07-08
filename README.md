@@ -45,6 +45,12 @@ or if that craps out complaining about `/dev/dsp`, try
 
     aoss ./pytebeat.py
 
+or if there are problems with aoss, or padsp try
+    
+     sudo alsa force-reload
+
+and then just run ./pytebeat.py and that might work
+
 Then edit the C expression in blue using your cursor keys and stuff.
 It ought to make sound right away. If not, check to see if you’re
 muted or something.

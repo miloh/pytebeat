@@ -111,8 +111,9 @@ def make_window():
     font = pygame.font.Font(default_font, 28) if os.path.exists(default_font) else None
     
     
-    screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    pygame.mouse.set_visible(False)
+  #  screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+    screen = pygame.display.set_mode((720, 512), )
+    pygame.mouse.set_visible(True)
     formula = sdltextfield.TextField((100, 375), 
                                      foreground=(0,0,255),
                                      font=font,
