@@ -34,7 +34,9 @@ class KeyRepeater(object):
 
 
 class TextField(object):
-    def __init__(self, pos, text='', focused=True, font=None, background=0, foreground=(255, 255, 255), selected_background=(78,78,78)):
+    def __init__(self, pos, text='', focused=True, font=None, background=0,
+                 foreground=(255, 255, 255), selected_background=(64,64,64),
+                 width=2**31):
         self.pos = pos
         self.text = text
         self.font = font or pygame.font.Font(None, 48)

@@ -5,7 +5,7 @@
 # - integer object has no attribute astype
 # - improve parse errors
 
-import sys, wave, os, time, subprocess, pygame, shuntparse, sdltextfield
+import sys, wave, os, time, subprocess, pygame, shuntparse, sdltextfield, errno
 
 try:
     from Numeric import array, arange, UInt8
@@ -103,12 +103,21 @@ def open_new_outfile():
         i += 1
 
 def make_window():
-    outfd = open('/dev/dsp', 'w')
+    try:
+        outfd = open('/dev/dsp', 'w')
+    except IOError, e:
+        if e.errno != errno.EACCES:
+            raise
+        # Probably we are on a system without Open Sound System, like
+        # most Linuxes of recent vintage.  Try invoking ALSA's aplay
+        # command instead.
+        outfd = os.popen('aplay -f U8', 'w')
+        
     outfile2 = open_new_outfile()
     outfd = Tee(outfd, outfile2)
     pygame.init()
-    default_font = 'Dion.ttf'
-    font = pygame.font.Font(default_font, 28) if os.path.exists(default_font) else None
+    default_font = '/home/kragen/.fonts/a/anami.ttf'
+    font = pygame.font.Font(default_font, 24) if os.path.exists(default_font) else None
     
     
   #  screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
